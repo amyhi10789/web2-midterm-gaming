@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Board View</title>
+</head>
+
+<body>
+    <h1>Message Board</h1>
+    <p><a href="form.html">Add New Message</a></p>
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Message</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="dataTable">
+        </tbody>
+    </table>
+    <script>
+        // 1. The function to get data from the server
+        async function loadMessages() {
+            // Ask the backend for the data
+            const response = await fetch('/api/messages');
+            // Convert the response to usable JSON
+            const data = await response.json();
+            // Grab the table body element
+            const tableBody = document.getElementById('dataTable');
+            // Reset the table content
+            tableBody.innerHTML = '';
+            // Loop through the data and create table rows as a string
+            // We use the 'index' to know which item to delete later
+            data.forEach((item, index) => {
+                const rowHtml = `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>${item.message}</td>
+                        <td>
+                            <button onclick="deleteMessage(${index})">Delete</button>
+                        </td>
+                    </tr>
+                `;
+                // Add this string to the table body contents
+                tableBody.innerHTML += rowHtml;
+            });
+        }
+        // 2. The function to delete an item
+        async function deleteMessage(index) {
+            // Send a DELETE request to the specific URL (e.g., /api/messages/2)
+            await fetch(`/api/messages/${index}`, {
+                method: 'DELETE'
+            });
+            // Re-load the table to show the item is gone
+            loadMessages();
+        }
+        // 3. Run the load function when the page first opens
+        loadMessages();
+    </script>
+</body>
+
+</html>
