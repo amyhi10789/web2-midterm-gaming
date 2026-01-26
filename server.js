@@ -20,6 +20,7 @@ function saveUsers(users) {
 }
 
 app.post("/login", (req, res) => {
+    console.log("LOGIN REQUEST BODY:", req.body);
     const { username, theme } = req.body;
     const users = loadUsers();
 
@@ -43,12 +44,42 @@ app.post("/login", (req, res) => {
 
 app.get("/progress/:username", (req, res) => {
     const users = loadUsers();
-    res.json(users[req.params.username]);
+    const user = users[req.params.username];
+
+    if (!user) {
+        return res.json({
+            progress: {
+                room1: "unlocked",
+                room2: "locked",
+                room3: "locked",
+                room4: "locked",
+                room5: "locked",
+                completed: false
+            }
+        });
+    }
+
+    res.json(user);
 });
+
 
 app.post("/progress", (req, res) => {
     const { username, room } = req.body;
     const users = loadUsers();
+
+    if (!users[username]) {
+        users[username] = {
+            theme: "dark",
+            progress: {
+                room1: "unlocked",
+                room2: "locked",
+                room3: "locked",
+                room4: "locked",
+                room5: "locked",
+                completed: false
+            }
+        };
+    }
 
     users[username].progress[room] = "completed";
 
@@ -68,6 +99,7 @@ app.post("/progress", (req, res) => {
     saveUsers(users);
     res.json(users[username].progress);
 });
+
 
 app.post("/reset", (req, res) => {
     const { username } = req.body;
