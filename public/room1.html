@@ -8,15 +8,72 @@
 
 <body>
 
-    <h1>Room 1</h1>
-
-    <div class="card">
-        <p>Puzzle goes here.</p>
-        <button id="complete">Complete Room</button>
+    <div class="room-card">
+        <h1>Room 1: The First Encounter</h1>
+        <h2>This where the story all began... </h2>
+        <p></p>
+        <p>You are a world-class detective who is known for cracking even the crime scene's most difficult mysteries.
+            Today, a distressed stranger enters your office in a burst of panic.</p>
+        <p>"My wife! My wife!" He screams in an intense fit of desperation. "Please help me, detective <span
+                id="detective-name">, please</span>! I found her dead inside her room, with a knife stabbed straight
+            through her heart! Oh detective, please help me! I've already reported the incident to the police, and
+            they're
+            currently investigating the murder site... but no luck so far... so I've come to you as my last hope." </p>
+        <p>"Calm down, calm down," You say. "I'm here to help. Please tell me your name?" </p>
+        <p>The stranger replies, "John, <span id="detective-gender">detective</span>."</p>
+        <p>"And your wife's name?"</p>
+        <p>"Mary," says the stranger.</p>
+        <h2>A couple days later...</h2>
+        <p>The forensics team handling the investigation in Mary's room have started to uncover evidence. They found a
+            series of newspapers scattered around the room.</p>
+        <img src="images/newspaper1.png" alt="newspaper 1" style="height: 300px">
+        <p></p>
+        <img src="images/newspaper2.png" alt="newspaper 2" style="height: 300px">
+        <p></p>
+        <img src="images/newspaper3.png" alt="newspaper 3" style="height: 300px">
+        <p></p>
+        <img src="images/newspaper4.png" alt="newspaper 4" style="height: 300px">
+        <p>You take a look at the newspapers. It seems the culprit is playing a game with both you and the authorities -
+            one which you are starting to unravel.</p>
+        <p>The investigation has also led to the discovery of a puzzle rulebook left behind by the culprit. The police
+            have handed it to you. For now, it seems the culprit is not aware that you are in posession of this
+            rulebook. </p>
+        <h1 style="font-size: 22px">THE PUZZLE RULEBOOK</h1>
+        <ul style="text-align: left;">
+            <li>Answers may contain words or contain numbers, but will never include both words and numbers.</li>
+            <li>Answers with words will be entirely lowercase.</li>
+            <li>Answers with words could have more than one word (eg. phrases, full names, etc.)</li>
+            <li>Answers with words may contain spaces in between the two (or more) words, but also may not.</li>
+            <li>Answers with numbers will not contain spaces.</li>
+            <li>Answers will never contain special symbols, regardless of words or numbers.</li>
+        </ul>
+        <p></p>
+        <p style="letter-spacing: 2.5px;"><em><strong>WHAT WAS THE CULPRIT'S FIRST CLUE?</strong></em></p>
+        <p></p>
+        <input class="answer-input" placeholder="Enter your answer here...">
+        <p></p>
+        <button id="check_answer">SUBMIT ANSWER</button>
+        <button id="complete" class="hidden">Complete Room</button>
     </div>
 
     <script>
         const ROOM_NAME = "room1";
+
+        const name = localStorage.getItem("username");
+        if (name) {
+            document.getElementById("detective-name").textContent = name;
+        }
+
+        const gender = localStorage.getItem("gender");
+        const genderSpan = document.getElementById("detective-gender");
+
+        if (gender === "female") {
+            genderSpan.textContent = "ma'am";
+        } else if (gender === "male") {
+            genderSpan.textContent = "sir";
+        } else {
+            genderSpan.textContent = "detective";
+        }
     </script>
     <script src="js/room.js"></script>
 </body>

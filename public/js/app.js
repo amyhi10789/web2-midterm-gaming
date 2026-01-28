@@ -3,7 +3,7 @@ const homeView = document.getElementById("home-view");
 const resetBtn = document.getElementById("reset");
 
 const usernameInput = document.getElementById("username");
-const themeSelect = document.getElementById("theme");
+const genderSelect = document.getElementById("gender");
 const startBtn = document.getElementById("start");
 
 const username = localStorage.getItem("username");
@@ -16,7 +16,7 @@ if (username) {
 
 startBtn.onclick = async () => {
     const username = usernameInput.value.trim();
-    const theme = themeSelect.value;
+    const gender = genderSelect.value;
 
     if (!username) {
         alert("Please enter a username");
@@ -26,11 +26,11 @@ startBtn.onclick = async () => {
     await fetch("/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, theme })
+        body: JSON.stringify({ username, gender })
     });
 
     localStorage.setItem("username", username);
-    localStorage.setItem("theme", theme);
+    localStorage.setItem("gender", gender);
 
     showHome();
 };

@@ -10,9 +10,10 @@ body {
     color: #6aff3d;
     margin: 0;
     min-height: 100vh;
+    padding: 80px 20px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: flex-start;
 }
 
 .card {
@@ -32,6 +33,36 @@ body {
     text-transform: uppercase;
 }
 
+.room-card {
+    background: #121212;
+    padding: 36px;
+    width: 100%;
+    max-width: 700px;
+    border-radius: 8px;
+    border: 1px solid #2cff00;
+    text-align: center;
+}
+
+.room-card h1 {
+    margin-bottom: 30px;
+    font-size: 28px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.room-card h2 {
+    margin-bottom: 30px;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+.room-card p {
+    margin-bottom: 30px;
+    font-size: 16px;
+    text-align: left;
+}
+
+
 .field {
     margin-bottom: 22px;
     text-align: left;
@@ -41,6 +72,22 @@ label {
     display: block;
     margin-bottom: 6px;
     font-size: 14px;
+}
+
+input,
+select {
+    width: 400px;
+    padding: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    background: #000;
+    border: 1px solid #2cff00;
+    color: #6aff3d;
+    border-radius: 4px;
+}
+
+input::placeholder {
+    color: #4a7f3d;
 }
 
 input,
@@ -126,4 +173,20 @@ button.danger:hover {
 .rooms button.locked:hover {
     background: transparent;
     color: #6aff3d;
+}
+
+.room-card input.flash-green {
+    border-color: #2cff00 !important;
+    background-color: rgba(44, 255, 0, 0.15);
+    box-shadow: 0 0 12px rgba(44, 255, 0, 0.8);
+}
+
+.room-card input.flash-red {
+    border-color: red !important;
+    background-color: rgba(255, 0, 0, 0.15);
+    box-shadow: 0 0 12px rgba(255, 0, 0, 0.8);
+}
+
+.room-card input {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }

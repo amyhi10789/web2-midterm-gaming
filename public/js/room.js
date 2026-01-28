@@ -1,7 +1,39 @@
 const username = localStorage.getItem("username");
 if (!username) location.href = "index.html";
 
-document.getElementById("complete").onclick = async () => {
+const answerInput = document.querySelector(".answer-input");
+const checkBtn = document.getElementById("check_answer");
+const completeBtn = document.getElementById("complete");
+
+const ANSWERS = {
+    room1: "i am closer than you think",
+    room2: "placeholder",
+    room3: "placeholder",
+    room4: "placeholder",
+    room5: "placeholder"
+};
+
+if (localStorage.getItem(`${ROOM_NAME}_solved`) === "true") {
+    completeBtn.classList.remove("hidden");
+}
+
+checkBtn.onclick = () => {
+    const userAnswer = answerInput.value.trim();
+    const correctAnswer = ANSWERS[ROOM_NAME];
+
+    answerInput.classList.remove("flash-green", "flash-red");
+    void answerInput.offsetWidth;
+
+    if (userAnswer === correctAnswer) {
+        answerInput.classList.add("flash-green");
+        localStorage.setItem(`${ROOM_NAME}_solved`, "true");
+        completeBtn.classList.remove("hidden");
+    } else {
+        answerInput.classList.add("flash-red");
+    }
+};
+
+completeBtn.onclick = async () => {
     localStorage.setItem(`${ROOM_NAME}_completed`, "true");
 
     const nextRoom = {
