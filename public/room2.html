@@ -8,15 +8,73 @@
 
 <body>
 
-    <h1>Room 2</h1>
-
-    <div class="card">
-        <p>Puzzle goes here.</p>
-        <button id="complete">Complete Room</button>
+    <div class="room-card">
+        <h1>Room 2: The Suspects</h1>
+        <h2>You start narrowing it down... </h2>
+        <p>With the discovery of the first clue, you've started to narrow down the suspects. It seems to have been
+            someone close to the deceased.</p>
+        <p>Even John, the deceased's husband, cannot be spared from your investigation. You've managed to compile a list
+            of possible suspects:</p>
+        <ul style="text-align: left;">
+            <li>John Urmom, Relationship: Husband</li>
+            <li>Karen Smith, Relationship: Best Friend</li>
+            <li>Stacy Johnson, Relationship: Sister</li>
+            <li>Wilson Johnson, Relationship: Brother</li>
+            <li>Joanne D'McDonald, Relationship: Maid</li>
+            <li>Dr. John Smith, Relationship: Doctor, Best Friend's Father</li>
+        </ul>
+        <p>You call each person in, questioning about their whereabouts the night of the incident. Each gave strong
+            statements, and many had alibis.</p>
+        <p>"I was asleep in the house," says John Urmom. "After waking up, I ran to my wife's room to wake her up -
+            that's when I saw her, and she was dead!"</p>
+        <p>"I only heard about this incident when John called me," Karen states, wiping away a tear. "I was at my own
+            home at the time, sleeping. I am so terribly sad about the loss of my best friend."</p>
+        <p>"I came here to visit Mary this week, but me and Wilson are living in a hotel, not their house. We were both
+            at the hotel resting when the murder occured," Stacy states. Wilson gave a similar, uncontradictory
+            statement. </p>
+        <p>"I go to a different part of the residence at night when my work is over," says the maid Joanne. "I had no
+            idea the murder occured until the next morning."</p>
+        <p>"I was working late at the hospital that night," states Dr. John Smith. "Mary had come in the night before
+            for a routine checkup, and she was fine. That was the last I saw of her."</p>
+        <p>You don't seem to find anything wrong about their statements, nothing that contradicts your existing
+            evidence. However, once all the suspects have left the room, you notice two slips of paper that has fallen
+            onto the ground:</p>
+        <p></p>
+        <img src="images/slip1.png" alt="slip 1" style="height: 200px">
+        <p></p>
+        <img src="images/slip2.png" alt="slip 2" style="height: 210px">
+        <p></p>
+        <p>It must have been left by one of the suspects, however you have no idea which was the one that dropped it.
+            The slips seem to point to a code, however you must figure out the code yourself.
+        </p>
+        <p>You may refer to the puzzle rulebook in room 1.</p>
+        <p></p>
+        <p style="letter-spacing: 2.5px;"><em><strong>WHAT WAS THE CULPRIT'S SECOND CLUE?</strong></em></p>
+        <p></p>
+        <input class="answer-input" placeholder="Enter your answer here...">
+        <p></p>
+        <button id="check_answer">SUBMIT ANSWER</button>
+        <button id="complete" class="hidden">Complete Room</button>
     </div>
 
     <script>
         const ROOM_NAME = "room2";
+
+        const name = localStorage.getItem("username");
+        if (name) {
+            document.getElementById("detective-name").textContent = name;
+        }
+
+        const gender = localStorage.getItem("gender");
+        const genderSpan = document.getElementById("detective-gender");
+
+        if (gender === "female") {
+            genderSpan.textContent = "ma'am";
+        } else if (gender === "male") {
+            genderSpan.textContent = "sir";
+        } else {
+            genderSpan.textContent = "detective";
+        }
     </script>
     <script src="js/room.js"></script>
 </body>
