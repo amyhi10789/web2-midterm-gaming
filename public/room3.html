@@ -8,15 +8,106 @@
 
 <body>
 
-    <h1>Room 3</h1>
-
-    <div class="card">
-        <p>Puzzle goes here.</p>
-        <button id="complete">Complete Room</button>
+    <div class="room-card">
+        <h1>Room 3: The Hidden Inheritance</h1>
+        <h2>What could that number possibly mean... </h2>
+        <p>After figuring out the culprit's second clue, you sit at your desk, nulling over the number for almost a full
+            day.</p>
+        <p>At the very least, you can 100% confirm that the culprit is one of your identified suspects, as only
+            the culprit would leave behind such mysterious slips with riddles and puzzles.</p>
+        <p>It is quite startling to think that someone close to Mary would murder her just like that, but now you know
+            they had a motive besides just pure bloodlust.</p>
+        <p>You can also safely assume that the culprit's second clue wasn't really a clue at all, it was more likely
+            something they had wanted to hand over to another person - perhaps an accomplice? </p>
+        <p>It would make sense that they had accidentally dropped it on the floor of the investigation room
+            while they were being questioned, but that also means they likely know you are in possession of the slips
+            now. </p>
+        <p>Being the culprit, they will also assume the worst (which is that you have figured out the clue), and execute
+            their next steps accordingly.</p>
+        <p>You have summarized your findings from the second clue into your continually growing investigation notepad:
+        </p>
+        <h1 style="font-size: 22px">INVESTIGATION NOTES ON MARY'S MURDER</h1>
+        <h1 style="font-size: 17px;">Information Gathered from Second Clue</h1>
+        <ul style="text-align: left;">
+            <li>Culprit's second "clue": 1134000000</li>
+            <li>This second clue was accidentally dropped during questioning.</li>
+            <li>Culprit is 100% confirmed among listed suspects.</li>
+            <li>Culprit has a confirmed motive, not yet sure of motive.</li>
+            <li>There is a possibility of accomplices in this case.</li>
+            <li>Culprit is a master of logic, and will soon be aware of our team's knowledge of all the above
+                information, as soon as they discover the missing slip.</li>
+        </ul>
+        <p>The culprit's second "clue" was a number, 1134000000. What could such a big number possibly entail? What can
+            be measured using such a large number anyway? It's a number in the billions!</p>
+        <p>Just then, you receive an information briefing from one of your agents. Most of it is information you already
+            know, or have been briefed about before.</p>
+        <p>However, one thing your agent says catches your attention. "... Mary was an old rich woman, she lived with
+            only her husband and their maid... " Your agent rambles.</p>
+        <p>"Wait," You say. "Pause. Did you say Mary was an old <em>rich</em> woman?"</p>
+        <p>"Indeed she is," You agent states. "We just found out today after doing an extensive background check on Mary
+            and the family, as Mary was a master at keeping her wealth hidden. Their house was honestly quite small
+            too, for such a rich family!"</p>
+        <p>Hold up. That could be it! With Mary being so rich, you can finally pinpoint a possible motive for the murder
+            - Mary's wealth. The people closest to her would be most likely to receive all of Mary's wealth after death.
+            Furthermore, there is a chance that the number 1134000000, which would refer to 1.134 billion dollars
+            if interpreted in money, could refer to the amount of wealth Mary posessed.
+        </p>
+        <p>"Agent," You say. "I'm going to need you to find Mary's bank or where she kept all this money, so we can
+            confirm for ourselves. Then, I'm going to need you to check if Mary had written up a will of any sort."</p>
+        <p>An hour later, your agent is back with the information you need. "The bank she kept her money at wasn't a
+            mainstream bank - it's this little business all the way across the city in probably the sketchiest
+            location possible."</p>
+        <p>"We'll need to go see for ourselves if there's anything useful. The bank employees may know something, and if
+            we explain we're here for the investigation, they will let us look into Mary's detailed transaction
+            history," You say.
+        </p>
+        <p>You and your agent, plus a bodyguard for safety's sake, head to the sketchy bank together to further your
+            investigation. The bank seems even sketchier when you step inside, as the interior is rusted and the bank
+            employees are expressionless, almost seeming like robots. You explain that you're here for the investigation
+            into Mary's death, and ask to check Mary's transaction history - however the bank employee explains that
+            this bank doesn't keep records of transaction history, and that all money is stored in cash.</p>
+        <p>You realize that Mary may have chosen such a sketchy bank for this exact purpose. What illegal stuff was she
+            up too with 1.134 billion dollars in her posession? You instead ask to see her cash. The bank employee leads
+            you to into the bank which is underground for some reason, through a messy maze of twists and tunnels, and
+            towards the entrance to an enormous vault.</p>
+        <p>However, things take a dark turn when the employee suddenly runs off before your group as time to react.
+            Then, your agent with enhanced hearing starts feeling distant vibrations. "Oh no," Your agent says, alarmed.
+            "I think this bank is about to collapse on us."</p>
+        <p>"If we don't think fast, we're all going to die!" You cry. You suddenly remember out of the corner of your
+            eye, seeing your bodyguard grab a map of the bank's underground tunnels. As if on cue, your bodyguard pulls
+            out the map:</p>
+        <p></p>
+        <img src="images/map.png" alt="map" style="height: 400px">
+        <p></p>
+        <p style="letter-spacing: 2.5px;"><em><strong>HOW CAN YOU ESCAPE THE MAZE?</strong></em></p>
+        <p><em>Your code for this question will consist of multiple of directions (left, right, up, down) separated by
+                spaces.</em></p>
+        <p><em>Assume you don't start inside the map itself, so your first step will move you onto the map.</em></p>
+        <p></p>
+        <input class="answer-input" placeholder="Enter your answer here...">
+        <p></p>
+        <button id="check_answer">SUBMIT ANSWER</button>
+        <button id="complete" class="hidden">Complete Room</button>
     </div>
 
     <script>
         const ROOM_NAME = "room3";
+
+        const name = localStorage.getItem("username");
+        if (name) {
+            document.getElementById("detective-name").textContent = name;
+        }
+
+        const gender = localStorage.getItem("gender");
+        const genderSpan = document.getElementById("detective-gender");
+
+        if (gender === "female") {
+            genderSpan.textContent = "ma'am";
+        } else if (gender === "male") {
+            genderSpan.textContent = "sir";
+        } else {
+            genderSpan.textContent = "detective";
+        }
     </script>
     <script src="js/room.js"></script>
 </body>
