@@ -9,7 +9,7 @@ const ANSWERS = {
     room1: "i am closer than you think",
     room2: "1134000000",
     room3: "up right up right up left up right up left up left down left up left up right up right up right up left up left up right up left up",
-    room4: "placeholder",
+    room4: "if i am ever dead it was stacy and wilson",
     room5: "placeholder"
 };
 
