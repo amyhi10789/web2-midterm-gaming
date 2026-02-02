@@ -1,0 +1,13 @@
+{
+  "sp_am.y12567": {
+    "gender": "other",
+    "progress": {
+      "room1": "unlocked",
+      "room2": "locked",
+      "room3": "locked",
+      "room4": "locked",
+      "room5": "locked",
+      "completed": false
+    }
+  }
+}

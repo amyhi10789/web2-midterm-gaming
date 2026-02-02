@@ -10,12 +10,30 @@ const ANSWERS = {
     room2: "1134000000",
     room3: "up right up right up left up right up left up left down left up left up right up right up right up left up left up right up left up",
     room4: "if i am ever dead it was stacy and wilson",
-    room5: "placeholder"
+    room5: "5689"
 };
 
-if (localStorage.getItem(`${ROOM_NAME}_solved`) === "true") {
-    completeBtn.classList.remove("hidden");
-}
+fetch(`/progress/${username}`)
+    .then(res => res.json())
+    .then(data => {
+        const progress = data.progress ?? data;
+
+        if (progress[ROOM_NAME] === "locked") {
+            alert("This room is locked. Complete previous rooms first.");
+            location.href = "index.html";
+            return;
+        }
+
+        if (progress[ROOM_NAME] === "completed") {
+            const ending = document.getElementById("ending-text");
+            if (ending) {
+                ending.classList.remove("hidden");
+            }
+
+            completeBtn.classList.remove("hidden");
+        }
+    });
+
 
 checkBtn.onclick = () => {
     const userAnswer = answerInput.value.trim();
@@ -26,34 +44,28 @@ checkBtn.onclick = () => {
 
     if (userAnswer === correctAnswer) {
         answerInput.classList.add("flash-green");
-        localStorage.setItem(`${ROOM_NAME}_solved`, "true");
+
+        const ending = document.getElementById("ending-text");
+        if (ending) {
+            ending.classList.remove("hidden");
+        }
+
         completeBtn.classList.remove("hidden");
+
+        answerInput.disabled = true;
+        checkBtn.disabled = true;
     } else {
         answerInput.classList.add("flash-red");
     }
 };
 
+
 completeBtn.onclick = async () => {
-    localStorage.setItem(`${ROOM_NAME}_completed`, "true");
-
-    const nextRoom = {
-        room1: "room2",
-        room2: "room3",
-        room3: "room4",
-        room4: "room5"
-    }[ROOM_NAME];
-
-    if (nextRoom) {
-        localStorage.setItem(`${nextRoom}_unlocked`, "true");
-    } else {
-        localStorage.setItem("game_completed", "true");
-    }
-
-    fetch("/progress", {
-        method: "POST",
+    await fetch(`/progress/${username}`, {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, room: ROOM_NAME })
-    }).catch(() => { });
+        body: JSON.stringify({ room: ROOM_NAME })
+    });
 
     location.href = "index.html";
 };

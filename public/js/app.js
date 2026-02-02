@@ -14,6 +14,13 @@ if (username) {
     showLogin();
 }
 
+function getCookie(name) {
+    const parts = document.cookie
+        .split("; ")
+        .find(row => row.startsWith(name + "="));
+    return parts ? decodeURIComponent(parts.split("=")[1]) : null;
+}
+
 startBtn.onclick = async () => {
     const username = usernameInput.value.trim();
     const gender = genderSelect.value;
@@ -31,6 +38,7 @@ startBtn.onclick = async () => {
 
     localStorage.setItem("username", username);
     localStorage.setItem("gender", gender);
+    document.cookie = `player=${encodeURIComponent(username)}; path=/`;
 
     showHome();
 };
@@ -39,41 +47,46 @@ function showHome() {
     loginView.classList.add("hidden");
     homeView.classList.remove("hidden");
 
-    document.querySelectorAll(".rooms button").forEach(btn => {
-        const room = btn.dataset.room;
+    const cookieName = getCookie("player");
+    if (cookieName) {
+        document.querySelector("#home-view h1").textContent =
+            `Welcome, Detective ${cookieName} - Select Rooms`;
+    }
 
-        let isLocked = false;
+    fetch(`/progress/${username}`)
+        .then(res => res.json())
+        .then(data => {
+            const progress = data.progress ?? data;
 
-        if (room !== "room1") {
-            isLocked = localStorage.getItem(`${room}_unlocked`) !== "true";
-        }
+            document.querySelectorAll(".rooms button").forEach(btn => {
+                const room = btn.dataset.room;
+                const status = progress[room];
 
-        btn.classList.toggle("locked", isLocked);
+                const isLocked = status === "locked";
 
-        const lockIcon = btn.querySelector(".lock");
-        if (lockIcon) {
-            lockIcon.style.display = isLocked ? "inline" : "none";
-        }
+                btn.classList.toggle("locked", isLocked);
 
-        btn.onclick = () => {
-            if (isLocked) {
-                alert("This room is locked. Complete the previous room first.");
-                return;
+                const lockIcon = btn.querySelector(".lock");
+                if (lockIcon) {
+                    lockIcon.style.display = isLocked ? "inline" : "none";
+                }
+
+                btn.onclick = () => {
+                    if (isLocked) {
+                        alert("This room is locked. Complete the previous room first.");
+                        return;
+                    }
+                    location.href = `${room}.html`;
+                };
+            });
+
+            if (progress.completed === true) {
+                resetBtn.classList.remove("hidden");
+            } else {
+                resetBtn.classList.add("hidden");
             }
-            location.href = `${room}.html`;
-        };
-
-        if (localStorage.getItem("game_completed") === "true") {
-            resetBtn.classList.remove("hidden");
-        } else {
-            resetBtn.classList.add("hidden");
-        }
-
-    });
+        });
 }
-
-
-
 
 function showLogin() {
     loginView.classList.remove("hidden");
@@ -83,13 +96,13 @@ function showLogin() {
 resetBtn.onclick = async () => {
     const username = localStorage.getItem("username");
 
-    await fetch("/reset", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username })
-    });
+    if (username) {
+        await fetch(`/users/${username}`, {
+            method: "DELETE"
+        });
+    }
 
     localStorage.clear();
-    showLogin();
+    document.cookie = "player=; Max-Age=0; path=/";
+    location.reload();
 };
-

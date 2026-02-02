@@ -190,3 +190,62 @@ button.danger:hover {
 .room-card input {
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
+
+table {
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid #2cff00;
+}
+
+th,
+td {
+    border: 1px solid #2cff00;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background: #000;
+}
+
+#progress-table {
+    width: 100%;
+    max-width: 420px;
+    margin: 24px auto;
+    border-collapse: collapse;
+    border: 1px solid #2cff00;
+}
+
+#progress-table th,
+#progress-table td {
+    border: 1px solid #2cff00;
+    padding: 12px;
+    text-align: center;
+    font-size: 15px;
+}
+
+#progress-table th {
+    background: #000;
+    letter-spacing: 2px;
+}
+
+#progress-table tr {
+    transition: background-color 0.2s ease;
+}
+
+#progress-table tr:hover {
+    background-color: rgba(44, 255, 0, 0.08);
+}
+
+.status-locked {
+    color: #4a7f3d;
+}
+
+.status-unlocked {
+    color: #ffe066;
+}
+
+.status-completed {
+    color: #2cff00;
+    font-weight: bold;
+}

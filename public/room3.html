@@ -9,7 +9,10 @@
 <body>
 
     <div class="room-card">
-        <h1>Room 3: The Hidden Inheritance</h1>
+        <h1>Room 3: The Hidden Bank</h1>
+        <p><em>If you so choose, you may play this room in hard mode (no hints).</em></p>
+        <button onclick="location.href='room3.html?mode=hard'">Hard Mode</button>
+        <p></p>
         <h2>What could that number possibly mean... </h2>
         <p>After figuring out the culprit's second clue, you sit at your desk, nulling over the number for almost a full
             day. You have managed to summarize your findings from the second clue into your
@@ -69,9 +72,12 @@
         <img src="images/map.png" alt="map" style="height: 400px">
         <p></p>
         <p style="letter-spacing: 2.5px;"><em><strong>HOW CAN YOU ESCAPE THE MAZE?</strong></em></p>
-        <p><em>Your code for this question will consist of multiple of directions (left, right, up, down) separated by
-                spaces.</em></p>
-        <p><em>Assume you don't start inside the map itself, so your first step will move you onto the map.</em></p>
+        <p id="maze-hint-1"><em>Your code for this question will consist of multiple of directions (left, right, up,
+                down) separated by spaces.</em></p>
+        <p id="maze-hint-2"><em>Assume you don't start inside the map itself, so your first step will move you onto the
+                map.</em></p>
+        <p id="maze-hint-3"><em>There is only one correct path, and each move (left, right, up, down) only takes you to
+                whatever length along that direction is necessary for the correct path.</em></p>
         <p></p>
         <input class="answer-input" placeholder="Enter your answer here...">
         <p></p>
@@ -81,6 +87,15 @@
 
     <script>
         const ROOM_NAME = "room3";
+
+        const params = new URLSearchParams(window.location.search);
+        const mode = params.get("mode") || "easy";
+
+        if (mode === "hard") {
+            document.getElementById("maze-hint-1").style.display = "none";
+            document.getElementById("maze-hint-2").style.display = "none";
+            document.getElementById("maze-hint-3").style.display = "none";
+        }
 
         const name = localStorage.getItem("username");
         if (name) {
@@ -98,6 +113,7 @@
             genderSpan.textContent = "detective";
         }
     </script>
+
     <script src="js/room.js"></script>
 </body>
 
